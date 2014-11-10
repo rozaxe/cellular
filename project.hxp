@@ -1,0 +1,28 @@
+import project.*;
+import sys.io.File;
+
+class Project extends HXProject {
+
+	public function new () {
+
+		super ();
+
+		var config = haxe.Json.parse (sys.io.File.getContent ("config.json"));
+
+		meta = { title: "Automate Cellulaire" };
+
+		app = { main: "Main", path: "out", file:"run" };
+
+		if (platformType == PlatformType.DESKTOP) {
+			window = { width: config.size, height: config.size, resizable: false };
+		} else {
+			window = { width: 0, height: 0 };
+		}
+
+		assets.push (new Asset ("config.json"));
+
+		haxelibs.push (new Haxelib ("openfl"));
+
+	}
+
+}
